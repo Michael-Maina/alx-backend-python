@@ -58,3 +58,29 @@ class TestGetJson(unittest.TestCase):
             expected_response = get_json(test_url)
             self.assertEqual(expected_response, test_payload)
             mocked_response.json.assert_called_once()
+
+
+class TestMemoize(unittest.TestCase):
+    """
+    Test Suite for memoize function
+    """
+    def test_memoize(self):
+        """
+        Tests memoization of a function
+        """
+        class TestClass:
+            """ Test Class """
+            def a_method(self):
+                """ Returns an integer, 42"""
+                return 42
+
+            @memoize
+            def a_property(self):
+                """ Returns a memoized property """
+                return self.a_method()
+            
+        with patch.object(TestClass, 'a_method', return_value=42) as mocked_memo:
+            memo_test = TestClass()
+            memo_test.a_property
+            memo_test.a_property
+            mocked_memo.asset_called_once()
