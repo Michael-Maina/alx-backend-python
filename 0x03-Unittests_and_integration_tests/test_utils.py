@@ -78,9 +78,9 @@ class TestMemoize(unittest.TestCase):
             def a_property(self):
                 """ Returns a memoized property """
                 return self.a_method()
-            
-        with patch.object(TestClass, 'a_method', return_value=42) as mocked_memo:
+
+        with patch.object(TestClass, 'a_method', return_value=42) as mock_memo:
             memo_test = TestClass()
             memo_test.a_property
             memo_test.a_property
-            mocked_memo.asset_called_once()
+            mock_memo.asset_called_once()
